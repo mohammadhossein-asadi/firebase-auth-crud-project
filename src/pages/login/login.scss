@@ -18,6 +18,19 @@
       width: 200px;
       height: 30px;
       border: none;
+      background-color: purple;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    span {
+      font-size: 12;
+      font-weight: bold;
+      color: red;
+      margin: 10px;
     }
   }
 }
