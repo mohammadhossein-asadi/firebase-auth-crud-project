@@ -3,19 +3,31 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
+  const [data, setData] = useState({});
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    await setDoc(doc(db, "cities", "LA"), {
-      name: "Los Angeles",
-      state: "CA",
-      country: "USA",
-    });
+    try {
+      const res = await addDoc(collection(db, "cities"), {
+        name: "Los Angeles",
+        state: "CA",
+        country: "USA",
+        timeStamp: serverTimestamp(),
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
